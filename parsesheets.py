@@ -4,11 +4,13 @@ import os.path
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
+
+#my own classes
 from classes import Student
 from classes import Tutor
 
 # If modifying these scopes, delete the file token.pickle.
-SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
+SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 
 # The ID and range of a sample spreadsheet.
 SAMPLE_SPREADSHEET_ID = '11dWm0lbaDnaburQQiRPA54idP63n2lz_Q1KSnGhM6oQ'
@@ -61,6 +63,7 @@ def main():
 
     # Call the Sheets API
     sheet = service.spreadsheets()
+    #here is whre instead we could get all of the valus
     result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
                                 range=SAMPLE_RANGE_NAME).execute()
     # values[0] returns things by column
@@ -85,11 +88,13 @@ def main():
             #monday times
             mt = person_info[2].split(",")
             for t in mt:
-                times.add("m" + t.strip())
+                if t != "none":
+                    times.add("m" + t.strip())
             #tuesday times
             tt = person_info[3].split(",")
             for t in tt:
-                times.add("t" + t.strip())
+                if t != "none":
+                    times.add("t" + t.strip())
 
             #subjects
             s = person_info[4].split(",")
@@ -113,13 +118,23 @@ def main():
         # print(tutor)
 
     # set which student we want to match
-    student_to_match = list_of_students[0]
+    student_to_match = list_of_students[2]
 
-    print(student_to_match) 
-    print("can be matched to:")
+
+    row = [str(student_to_match)]
     for tutor in list_of_tutors:
         if matches(student_to_match, tutor):
-            print(tutor)
-    
+            row.append(str(tutor)) 
+
+    values = [row]
+    # body
+    body = {
+            "values" : values
+            }
+
+    result = service.spreadsheets().values().batchUpdate(spreadsheetId=SAMPLE_SPREADSHEET_ID, body=body).execute()
+    print('{0} cells updated.'.format(result.get('totalUpdatedCells')))
+
+
 if __name__ == '__main__':
     main()
