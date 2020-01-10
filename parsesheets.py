@@ -13,16 +13,24 @@ SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 # The ID and range of a sample spreadsheet.
 SAMPLE_SPREADSHEET_ID = '11dWm0lbaDnaburQQiRPA54idP63n2lz_Q1KSnGhM6oQ'
 # range of stuff --> so start if ther are no titles or smth
-SAMPLE_RANGE_NAME = 'A45:D52'
+SAMPLE_RANGE_NAME = 'A45:E52'
 
 def matches(student, tutor):
-    match = True
-    if student.times != tutor.times:
-        match = False 
-    if student.subject != tutor.subject:
-        match = False 
+    # if student.times != tutor.times:
+        # match = False 
+    # if student.subject != tutor.subject:
+        # match = False 
+    t = False
+    s = False
+    
+    for time in student.times:
+        if time in tutor.times:
+            t = True 
+    for subject in student.subjects:
+        if subject in tutor.subjects:
+            s = True 
 
-    return match
+    return t and s 
 
 
 def main():
@@ -58,6 +66,8 @@ def main():
     # values[0] returns things by column
     values = result.get('values', [])
 
+    # parsing notes: for avalibilities, we will represent as [DAY][b,a,1,2,3,4]
+    # reminder: student constructor: (name, times, subject)
 
     # This is where the parsing is going to happen
     list_of_tutors = []
@@ -68,11 +78,29 @@ def main():
         #this is where we parse information
         for i in range(len(values)):
             person_info = values[i]
+            #time: [2-3]
+            times = set()
+            subjects = set()
+
+            #monday times
+            mt = person_info[2].split(",")
+            for t in mt:
+                times.add("m" + t.strip())
+            #tuesday times
+            tt = person_info[3].split(",")
+            for t in tt:
+                times.add("t" + t.strip())
+
+            #subjects
+            s = person_info[4].split(",")
+            for subject in s:
+                subjects.add(subject.strip())
+
             if person_info[1] == "student":
-                student = Student(person_info[0], person_info[2], person_info[3])
+                student = Student(person_info[0], times, subjects)
                 list_of_students.append(student)
             else:
-                tutor = Tutor(person_info[0], person_info[2], person_info[3])
+                tutor = Tutor(person_info[0], times, subjects)
                 list_of_tutors.append(tutor)
 
     # # debugging
