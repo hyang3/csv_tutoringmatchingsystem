@@ -13,7 +13,16 @@ SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 # The ID and range of a sample spreadsheet.
 SAMPLE_SPREADSHEET_ID = '11dWm0lbaDnaburQQiRPA54idP63n2lz_Q1KSnGhM6oQ'
 # range of stuff --> so start if ther are no titles or smth
-SAMPLE_RANGE_NAME = 'A44:C51'
+SAMPLE_RANGE_NAME = 'A45:D52'
+
+def matches(student, tutor):
+    match = True
+    if student.times != tutor.times:
+        match = False 
+    if student.subject != tutor.subject:
+        match = False 
+
+    return match
 
 
 def main():
@@ -59,20 +68,30 @@ def main():
         #this is where we parse information
         for i in range(len(values)):
             person_info = values[i]
-            if values[1] == "student":
+            if person_info[1] == "student":
                 student = Student(person_info[0], person_info[2], person_info[3])
                 list_of_students.append(student)
             else:
                 tutor = Tutor(person_info[0], person_info[2], person_info[3])
                 list_of_tutors.append(tutor)
 
-    print("students:")
-    for student in list_of_students:
-        print(student)
+    # # debugging
+    # print("students:")
+    # for student in list_of_students:
+        # print(student)
     
-    print("tutors:")
+    # print("tutors:")
+    # for tutor in list_of_tutors:
+        # print(tutor)
+
+    # set which student we want to match
+    student_to_match = list_of_students[0]
+
+    print(student_to_match) 
+    print("can be matched to:")
     for tutor in list_of_tutors:
-        print(tutor)
+        if matches(student_to_match, tutor):
+            print(tutor)
     
 if __name__ == '__main__':
     main()
