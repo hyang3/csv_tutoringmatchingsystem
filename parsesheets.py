@@ -13,7 +13,7 @@ SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 # The ID and range of a sample spreadsheet.
 SAMPLE_SPREADSHEET_ID = '11dWm0lbaDnaburQQiRPA54idP63n2lz_Q1KSnGhM6oQ'
 # range of stuff --> so start if ther are no titles or smth
-SAMPLE_RANGE_NAME = 'A2:G10'
+SAMPLE_RANGE_NAME = 'A44:C51'
 
 
 def main():
@@ -51,17 +51,28 @@ def main():
 
 
     # This is where the parsing is going to happen
+    list_of_tutors = []
     list_of_students = []
     if not values:
         print('No data found.')
     else:
+        #this is where we parse information
         for i in range(len(values)):
-            #this is where we parse information
-            student = Student(values[i][6],values[i][0])
-            list_of_students.append(student)
-    
+            person_info = values[i]
+            if values[1] == "student":
+                student = Student(person_info[0], person_info[2], person_info[3])
+                list_of_students.append(student)
+            else:
+                tutor = Tutor(person_info[0], person_info[2], person_info[3])
+                list_of_tutors.append(tutor)
+
+    print("students:")
     for student in list_of_students:
         print(student)
+    
+    print("tutors:")
+    for tutor in list_of_tutors:
+        print(tutor)
     
 if __name__ == '__main__':
     main()
