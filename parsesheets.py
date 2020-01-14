@@ -118,20 +118,25 @@ def main():
         # print(tutor)
 
     # set which student we want to match
-    student_to_match = list_of_students[2]
+    student_to_match = list_of_students[0]
 
 
     row = [str(student_to_match)]
+    num_matches = 0
     for tutor in list_of_tutors:
         if matches(student_to_match, tutor):
             row.append(str(tutor)) 
+            num_matches += 1
+
+    range_to_update = "A54:" + chr(ord("A") + num_matches) + "54"
+
 
     values = [row]
     # body
     body = {
             "value_input_option" : "RAW",
             "data" : {
-                    "range" : "A54:B54",
+                    "range" : range_to_update,
                     "values" : values
                 }            
             }
