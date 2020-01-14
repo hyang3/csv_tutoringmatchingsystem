@@ -129,12 +129,16 @@ def main():
     values = [row]
     # body
     body = {
-            "values" : values
+            "value_input_option" : "RAW",
+            "data" : {
+                    "range" : "A54:B54",
+                    "values" : values
+                }            
             }
 
     range_to_update = "A54:B54"
 
-    result = service.spreadsheets().values().update(spreadsheetId=SAMPLE_SPREADSHEET_ID, range=range_to_update, valueInputOption="RAW", body=body).execute()
+    result = service.spreadsheets().values().batchUpdate(spreadsheetId=SAMPLE_SPREADSHEET_ID, body=body).execute()
 
     print('{0} cells updated.'.format(result.get('totalUpdatedCells')))
 
