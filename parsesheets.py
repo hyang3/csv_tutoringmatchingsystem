@@ -5,7 +5,7 @@ from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 
-#my own classes
+#my own stuff 
 from classes import Student
 from classes import Tutor
 
@@ -132,7 +132,10 @@ def main():
             "values" : values
             }
 
-    result = service.spreadsheets().values().batchUpdate(spreadsheetId=SAMPLE_SPREADSHEET_ID, body=body).execute()
+    range_to_update = "A54:B54"
+
+    result = service.spreadsheets().values().update(spreadsheetId=SAMPLE_SPREADSHEET_ID, range=range_to_update, valueInputOption="RAW", body=body).execute()
+
     print('{0} cells updated.'.format(result.get('totalUpdatedCells')))
 
 
