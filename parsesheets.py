@@ -6,16 +6,15 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 
 #my own stuff 
-from classes import Student
-from classes import Tutor
+from classes import Person 
 
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 
 # The ID and range of a sample spreadsheet.
-SAMPLE_SPREADSHEET_ID = '11dWm0lbaDnaburQQiRPA54idP63n2lz_Q1KSnGhM6oQ'
+SAMPLE_SPREADSHEET_ID = '1RVDwqvr-YXgKwMgoGNGa5aWLu5LxjRBpGQzMJTgjeds'
 # range of stuff --> so start if ther are no titles or smth
-SAMPLE_RANGE_NAME = 'A45:E52'
+SAMPLE_RANGE_NAME = 'A:L'
 
 def matches(student, tutor):
     # if student.times != tutor.times:
@@ -80,33 +79,48 @@ def main():
     else:
         #this is where we parse information
         for i in range(len(values)):
+
+            #if the first line is just description
+            if i == 0:
+                continue
+
+            # *********************
+            # SETUP BEFORE PARSING
+            # *********************
+            #parsinf info about people
             person_info = values[i]
+
             #time: [2-3]
             times = set()
             subjects = set()
 
-            #monday times
-            mt = person_info[2].split(",")
-            for t in mt:
-                if t != "none":
-                    times.add("m" + t.strip())
-            #tuesday times
-            tt = person_info[3].split(",")
-            for t in tt:
-                if t != "none":
-                    times.add("t" + t.strip())
+            # *********************
+            # ACTUAL PARSING
+            # *********************
+
+            # TIMES!! : parse once for each day of the week
+            days = ["m", "t", "w", "r", "f"]
+            for i in range(5):
+                #monday avaliability is in col #6
+                times_for_this_day = person_info[6 + i].split(",")
+                for time in times_for_this_day:
+                    if time != "none":
+                        times.add(days[i] + time.strip())
 
             #subjects
-            s = person_info[4].split(",")
+            s = person_info[11].split(",")
             for subject in s:
                 subjects.add(subject.strip())
 
-            if person_info[1] == "student":
-                student = Student(person_info[0], times, subjects)
-                list_of_students.append(student)
+            # *********************
+            # SORTING STUDENTS VS TUTORS
+            # *********************
+
+            person = Person(person_info[0], person_info[1], person_info[2], person_info[3], person_info[4], person_info[5], times, subjects)
+            if person_info[0] == "student":
+                list_of_students.append(person)
             else:
-                tutor = Tutor(person_info[0], times, subjects)
-                list_of_tutors.append(tutor)
+                list_of_tutors.append(person)
 
     # # debugging
     # print("students:")
@@ -128,7 +142,7 @@ def main():
             row.append(str(tutor)) 
             num_matches += 1
 
-    range_to_update = "A54:" + chr(ord("A") + num_matches) + "54"
+    range_to_update = "N1:" + chr(ord("N") + num_matches) + "1"
 
 
     values = [row]
@@ -141,7 +155,7 @@ def main():
                 }            
             }
 
-    range_to_update = "A54:B54"
+    range_to_update = "A10:B10"
 
     result = service.spreadsheets().values().batchUpdate(spreadsheetId=SAMPLE_SPREADSHEET_ID, body=body).execute()
 
