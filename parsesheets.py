@@ -162,7 +162,6 @@ def main():
                     }            
                 }
 
-        # range_to_update = "A10:B10"
 
         result = service.spreadsheets().values().batchUpdate(spreadsheetId=SAMPLE_SPREADSHEET_ID, body=body).execute()
 
