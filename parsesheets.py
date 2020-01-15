@@ -74,6 +74,7 @@ def main():
     # This is where the parsing is going to happen
     list_of_tutors = []
     list_of_students = []
+    indexes_with_students = []
     if not values:
         print('No data found.')
     else:
@@ -100,12 +101,12 @@ def main():
 
             # TIMES!! : parse once for each day of the week
             days = ["m", "t", "w", "r", "f"]
-            for i in range(5):
+            for d in range(5):
                 #monday avaliability is in col #6
-                times_for_this_day = person_info[6 + i].split(",")
+                times_for_this_day = person_info[6 + d].split(",")
                 for time in times_for_this_day:
                     if time != "none":
-                        times.add(days[i] + time.strip())
+                        times.add(days[d] + time.strip())
 
             #subjects
             s = person_info[11].split(",")
@@ -119,6 +120,7 @@ def main():
             person = Person(person_info[0], person_info[1], person_info[2], person_info[3], person_info[4], person_info[5], times, subjects)
             if person_info[0] == "student":
                 list_of_students.append(person)
+                indexes_with_students.append(i + 1)
             else:
                 list_of_tutors.append(person)
 
@@ -132,34 +134,41 @@ def main():
         # print(tutor)
 
     # set which student we want to match
-    student_to_match = list_of_students[0]
+
+    # we want to automatically match all students 
+    print(indexes_with_students)
+    
+    n = 0
+    for index in indexes_with_students:
+        student_to_match = list_of_students[n]
+
+        row = [str(student_to_match)]
+        num_matches = 0
+        for tutor in list_of_tutors:
+            if matches(student_to_match, tutor):
+                row.append(str(tutor)) 
+                num_matches += 1
+
+        range_to_update = "N" + str(index) + ":" + chr(ord("N") + num_matches) + str(index)
 
 
-    row = [str(student_to_match)]
-    num_matches = 0
-    for tutor in list_of_tutors:
-        if matches(student_to_match, tutor):
-            row.append(str(tutor)) 
-            num_matches += 1
+        values = [row]
+        # body
+        body = {
+                "value_input_option" : "RAW",
+                "data" : {
+                        "range" : range_to_update,
+                        "values" : values
+                    }            
+                }
 
-    range_to_update = "N1:" + chr(ord("N") + num_matches) + "1"
+        # range_to_update = "A10:B10"
 
+        result = service.spreadsheets().values().batchUpdate(spreadsheetId=SAMPLE_SPREADSHEET_ID, body=body).execute()
 
-    values = [row]
-    # body
-    body = {
-            "value_input_option" : "RAW",
-            "data" : {
-                    "range" : range_to_update,
-                    "values" : values
-                }            
-            }
-
-    range_to_update = "A10:B10"
-
-    result = service.spreadsheets().values().batchUpdate(spreadsheetId=SAMPLE_SPREADSHEET_ID, body=body).execute()
-
-    print('{0} cells updated.'.format(result.get('totalUpdatedCells')))
+        print(str(num_matches) + " matches found.")
+        print('{0} cells updated.'.format(result.get('totalUpdatedCells')))
+        n += 1
 
 
 if __name__ == '__main__':
