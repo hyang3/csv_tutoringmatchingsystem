@@ -141,6 +141,9 @@ def main():
     # we want to automatically match all students 
     print(indexes_with_students)
     
+    # *********************
+    # AUTOMATCH STUDENTS TO TUTORS 
+    # *********************
     n = 0
     for index in indexes_with_students:
         student_to_match = list_of_students[n]
