@@ -16,4 +16,4 @@ class Person:
 
     def __str__(self):
         # return "ID: " + self.ID + " name: " + self.name 
-        return "type: " + self.type_of_user + " email: " + self.email + " first name: " + self.first_name + " last name: " + self.last_name + " phone number: " + self.phone_num + " home phone number: " + self.home_num + " times: " + str(self.times) + " subject: " + str(self.subjects)
+        return "{ type_of_user: " + "\"" +  self.type_of_user + "\"" + ", email: " + "\"" + self.email + "\"" + ", first_name: " + "\"" + self.first_name + "\"" + ", last_name: " + "\"" + self.last_name + "\"" + ", phone_num: " + "\"" + self.phone_num + "\"" + ", home_num: " + "\"" + self.home_num + "\"" + ", times: " + "[" + str(self.times)[1:-1] + "]" + ", subjects: " + "[" + str(self.subjects)[1:-1] + "]" + " }"
