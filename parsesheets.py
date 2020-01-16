@@ -15,23 +15,26 @@ SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 SAMPLE_SPREADSHEET_ID = '1RVDwqvr-YXgKwMgoGNGa5aWLu5LxjRBpGQzMJTgjeds'
 # range of stuff --> so start if ther are no titles or smth
 SAMPLE_RANGE_NAME = 'A:L'
+TIMES_AVALIABLE = 0
+SUBJECTS_AVALIABLE = 1
 
 def matches(student, tutor):
     # if student.times != tutor.times:
         # match = False 
     # if student.subject != tutor.subject:
         # match = False 
-    t = False
-    s = False
+    matches = [[],[]]
     
     for time in student.times:
         if time in tutor.times:
-            t = True 
+            matches[TIMES_AVALIABLE].append(time) 
     for subject in student.subjects:
         if subject in tutor.subjects:
-            s = True 
+            matches[SUBJECTS_AVALIABLE].append(subject) 
 
-    return t and s 
+    if len(matches[TIMES_AVALIABLE]) == 0 or len(matches[SUBJECTS_AVALIABLE]) == 0:
+        return None
+    return matches
 
 
 def main():
@@ -142,15 +145,18 @@ def main():
     for index in indexes_with_students:
         student_to_match = list_of_students[n]
 
-        row = [str(student_to_match)]
+        row = [0,0,str(student_to_match)]
         num_matches = 0
         for tutor in list_of_tutors:
-            if matches(student_to_match, tutor):
+            m = matches(student_to_match, tutor)
+            if m:
                 row.append(str(tutor)) 
                 num_matches += 1
+            print(m)
 
-        range_to_update = "N" + str(index) + ":" + chr(ord("N") + num_matches) + str(index)
 
+        # we add 2 so we can have the the addtl info of what time and subject matches there are
+        range_to_update = "M" + str(index) + ":" + chr(ord("M") + num_matches + 2) + str(index)
 
         values = [row]
         # body
