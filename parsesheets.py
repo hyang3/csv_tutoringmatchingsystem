@@ -115,6 +115,7 @@ def main():
             s = person_info[11].split(",")
             for subject in s:
                 subjects.add(subject.strip())
+            # also need to strip newlines??
 
             # *********************
             # SORTING STUDENTS VS TUTORS
@@ -148,18 +149,17 @@ def main():
     for index in indexes_with_students:
         student_to_match = list_of_students[n]
 
-        row = [0,0,str(student_to_match)]
+        row = [str(student_to_match)]
         num_matches = 0
         for tutor in list_of_tutors:
             m = matches(student_to_match, tutor)
             if m:
-                row.append(str(tutor)) 
+                row.append(str(tutor) + " | " + str(m)) 
                 num_matches += 1
             print(m)
 
 
-        # we add 2 so we can have the the addtl info of what time and subject matches there are
-        range_to_update = "M" + str(index) + ":" + chr(ord("M") + num_matches + 2) + str(index)
+        range_to_update = "M" + str(index) + ":" + chr(ord("M") + num_matches) + str(index)
 
         values = [row]
         # body
