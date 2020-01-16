@@ -78,57 +78,59 @@ def main():
     list_of_tutors = []
     list_of_students = []
     indexes_with_students = []
+
     if not values:
         print('No data found.')
-    else:
-        #this is where we parse information
-        for i in range(len(values)):
+        pass
 
-            #if the first line is just description
-            if i == 0:
-                continue
 
-            # *********************
-            # SETUP BEFORE PARSING
-            # *********************
-            #parsinf info about people
-            person_info = values[i]
-            for p in range(len(person_info)):
-                person_info[p] = person_info[p].strip()
+    #this is where we parse information
+    for i in range(len(values)):
 
-            #time: [2-3]
-            times = set()
-            subjects = set()
+        #if the first line is just description
+        if i == 0:
+            continue
 
-            # *********************
-            # ACTUAL PARSING
-            # *********************
+        # *********************
+        # SETUP BEFORE PARSING
+        # *********************
+        #parsinf info about people
+        person_info = values[i]
+        for p in range(len(person_info)):
+            person_info[p] = person_info[p].strip()
 
-            # TIMES!! : parse once for each day of the week
-            days = ["m", "t", "w", "r", "f"]
-            for d in range(5):
-                #monday avaliability is in col #6
-                times_for_this_day = person_info[6 + d].split(",")
-                for time in times_for_this_day:
-                    if time != "none":
-                        times.add(days[d] + time.strip())
+        times = set()
+        subjects = set()
 
-            #subjects
-            s = person_info[11].split(",")
-            for subject in s:
-                subjects.add(subject.strip())
-            # also need to strip newlines??
+        # *********************
+        # ACTUAL PARSING
+        # *********************
 
-            # *********************
-            # SORTING STUDENTS VS TUTORS
-            # *********************
+        # TIMES!! : parse once for each day of the week
+        days = ["m", "t", "w", "r", "f"]
+        for d in range(5):
+            #monday avaliability is in col #6
+            times_for_this_day = person_info[6 + d].split(",")
+            for time in times_for_this_day:
+                if time != "none":
+                    times.add(days[d] + time.strip())
 
-            person = Person(person_info[0], person_info[1], person_info[2], person_info[3], person_info[4], person_info[5], times, subjects)
-            if person_info[0] == "student":
-                list_of_students.append(person)
-                indexes_with_students.append(i + 1)
-            else:
-                list_of_tutors.append(person)
+        #subjects
+        s = person_info[11].split(",")
+        for subject in s:
+            subjects.add(subject.strip())
+        # also need to strip newlines??
+
+        # *********************
+        # SORTING STUDENTS VS TUTORS
+        # *********************
+
+        person = Person(person_info[0], person_info[1], person_info[2], person_info[3], person_info[4], person_info[5], times, subjects)
+        if person_info[0] == "student":
+            list_of_students.append(person)
+            indexes_with_students.append(i + 1)
+        else:
+            list_of_tutors.append(person)
 
     # # debugging
     # print("students:")
@@ -161,7 +163,12 @@ def main():
             print(m)
 
 
-        range_to_update = "M" + str(index) + ":" + chr(ord("M") + num_matches) + str(index)
+        t = len(list_of_tutors)
+        range_to_update = "M" + str(index) + ":" + chr(ord("M") + t) + str(index)
+
+        # clear entries// matches that existed before
+        for i in range(t - len(row)):
+            row.append("")
 
         values = [row]
         # body
