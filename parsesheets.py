@@ -93,6 +93,8 @@ def main():
             # *********************
             #parsinf info about people
             person_info = values[i]
+            for p in range(len(person_info)):
+                person_info[p] = person_info[p].strip()
 
             #time: [2-3]
             times = set()
@@ -140,7 +142,7 @@ def main():
     # set which student we want to match
 
     # we want to automatically match all students 
-    print(indexes_with_students)
+    # print(indexes_with_students)
     
     # *********************
     # AUTOMATCH STUDENTS TO TUTORS 
