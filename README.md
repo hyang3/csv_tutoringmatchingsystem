@@ -2,7 +2,7 @@
 
 ## Overview of Process
 
-(bold is backend and done programatically, users like students/tutors/person making matches won't have to interact with them at all)
+(italics is backend and done programatically, users like students/tutors/person making matches won't have to interact with them at all)
 
 1. students + tutors will fill out a form, *to which all their information will be loaded into a spreadsheet*
 2. *this will then automatically call a filter which will list all possible tutors and students, which will then be funneled into a form*
