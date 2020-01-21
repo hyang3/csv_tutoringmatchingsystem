@@ -11,7 +11,7 @@
 
 ## How to Use
 
-*todo* but basically install packages (or set up your venv), set configs, set up your credentials.json, and run the makefile
+*todo*  everything should be completely integrated, I think? no installation necessary?
 
 * form/sheet for students and teachers to sign up: <https://docs.google.com/spreadsheets/d/1U0W6xLDJ8bGpBPZCPmlLvhboHq-JAeVsLU92uXpPYQ4/edit#gid=1419891044>
 * script that generates potential matches (note that this is different from the above, temporarily as to not mess up data): <https://docs.google.com/spreadsheets/d/10OvyqWeAWngYK8uEdZBUI65_V2QIxgsK1gDij4HhRFc/edit#gid=1419891044>
@@ -19,4 +19,4 @@
 
 ## Known Bugs
 
-(also see git issues)
+(see git issues)
