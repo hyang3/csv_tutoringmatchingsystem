@@ -14,7 +14,7 @@
 *todo* but basically install packages (or set up your venv), set configs, set up your credentials.json, and run the makefile
 
 * form/sheet for students and teachers to sign up: <https://FILLTHISIN>
-* script that generates potential matches: <https://FILLTHISIN>
+* script that generates potential matches (and some testing data): <https://docs.google.com/spreadsheets/d/10OvyqWeAWngYK8uEdZBUI65_V2QIxgsK1gDij4HhRFc/edit#gid=1419891044> (_TODO_ eventually move this into the signup sheet)
 * form/sheet to create matches: <https://docs.google.com/spreadsheets/d/1yaLl_UQzjciNRgE5AD2BEPNI3fxuioH2wU_DQz-GdEg/edit#gid=834983429>
 
 ## Known Bugs
