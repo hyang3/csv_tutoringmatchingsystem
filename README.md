@@ -15,7 +15,7 @@
 
 * form/sheet for students and teachers to sign up: <https://docs.google.com/spreadsheets/d/1U0W6xLDJ8bGpBPZCPmlLvhboHq-JAeVsLU92uXpPYQ4/edit#gid=1419891044>
 * roster that reformats submissions into more readable format: <https://docs.google.com/spreadsheets/d/1AZ1dq8F15kXPUCrmI8eKKdgLmL3QDpUOO9s2LLS_MbI/edit#gid=0>
-* script that generates potential matches (note that this is different from the above, temporarily as to not mess up data): <https://docs.google.com/spreadsheets/d/10OvyqWeAWngYK8uEdZBUI65_V2QIxgsK1gDij4HhRFc/edit#gid=1419891044>
+* script that generates potential matches (note that this is different from the above, temporarily as to not mess up data): <https://docs.google.com/spreadsheets/d/1RVDwqvr-YXgKwMgoGNGa5aWLu5LxjRBpGQzMJTgjeds/edit#gid=0>
 * form/sheet to create matches: <https://docs.google.com/spreadsheets/d/1yaLl_UQzjciNRgE5AD2BEPNI3fxuioH2wU_DQz-GdEg/edit#gid=834983429>
 
 ## Known Bugs
