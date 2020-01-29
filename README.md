@@ -20,8 +20,7 @@ fill out the following form to sign up: <https://docs.google.com/spreadsheets/d/
 use this sheet, which links to a form, to match students to tutors whose avalibilities match: <https://docs.google.com/spreadsheets/d/1yaLl_UQzjciNRgE5AD2BEPNI3fxuioH2wU_DQz-GdEg/edit#gid=834983429>
 
 ### ADMIN: the following is a list of all spreadsheets in use
-* form/sheet for students and teachers to sign up: <https://docs.google.com/spreadsheets/d/1U0W6xLDJ8bGpBPZCPmlLvhboHq-JAeVsLU92uXpPYQ4/edit#gid=1419891044>
-* roster that reformats submissions into more readable format: <https://docs.google.com/spreadsheets/d/1AZ1dq8F15kXPUCrmI8eKKdgLmL3QDpUOO9s2LLS_MbI/edit#gid=0>
+* form/sheet for students and teachers to sign up + roster that reformats submissions into more readable format: <https://docs.google.com/spreadsheets/d/1U0W6xLDJ8bGpBPZCPmlLvhboHq-JAeVsLU92uXpPYQ4/edit#gid=1419891044>
 * form/sheet to create matches: <https://docs.google.com/spreadsheets/d/1yaLl_UQzjciNRgE5AD2BEPNI3fxuioH2wU_DQz-GdEg/edit#gid=834983429>
 
 ## Known Bugs
