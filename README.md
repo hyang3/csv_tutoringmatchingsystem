@@ -14,7 +14,7 @@
 *todo*  everything should be completely integrated, I think? no installation necessary?
 
 ### Students + Tutors:
-fill out the following form to sign up: <tinyurl.com/csvtutor>
+fill out the following form to sign up: <https://tinyurl.com/csvtutor>
 
 ### Match-Person:
 use this sheet, which links to a form, to match students to tutors whose avalibilities match: <https://docs.google.com/spreadsheets/d/1yaLl_UQzjciNRgE5AD2BEPNI3fxuioH2wU_DQz-GdEg/edit#gid=834983429>
