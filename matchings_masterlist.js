@@ -32,7 +32,6 @@ function newForm() {
     
     studentNum++
     studentsRows[studentNum] = n
-    // HANS
     students.push(student_obj);
   }
   
@@ -62,11 +61,8 @@ function newForm() {
       
       if (rawTutorData == '') {
         continue;
-      }
-      
-      // Logger.log("here!")
-      
-      // parse tutor data HANS
+      } 
+
       
       Logger.log("rawTutorData")
       Logger.log(rawTutorData)
@@ -117,11 +113,11 @@ function newForm() {
       // if you need any questions for the tutor in answer add them here e.g.
       var times = form.addCheckboxItem();
       times.setTitle('Select meeting time(s)')
-      .setChoiceValues(tutor.times_free); // HANS
+      .setChoiceValues(tutor.times_free); 
       
       var subjects = form.addListItem()
       .setTitle('Select subject')
-      .setChoiceValues(tutor.subjects_wanted); // HANS
+      .setChoiceValues(tutor.subjects_wanted); 
     }
     
     // adding each of the tutors to our select list
@@ -173,7 +169,7 @@ function updateForm() {
 // update master spreadsheet when match is created
 function onFormSubmit() {
   
-  // constants HANS
+  // constants 
   var NAME_COL = 2
   var EMAIL_COL = 1
   var MON_TIME_COL = 6
@@ -209,7 +205,6 @@ function onFormSubmit() {
   var subject = recentResponse[4]; 
   var names = ["Student Not Found", "Tutor Not Found"]
   
-  // HANS
   var filteredData = filteredSheet.getDataRange().getValues()
   var days = ["Monday ", "Tuesday ", "Wednesday ", "Thursday ", "Friday "]
   
@@ -218,8 +213,7 @@ function onFormSubmit() {
     for (var mode = 0; mode < 2; mode ++) {
       Logger.log("mode: " + mode.toString())
       if (filteredData[i][EMAIL_COL] == emails[mode]) {
-        // Logger.log("filteredData[i][EMAIL_COL]: " + filteredData[i][EMAIL_COL])
-        // console.log(i)
+        
         
         names[mode] = filteredData[i][NAME_COL];
         
